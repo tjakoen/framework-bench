@@ -1,6 +1,7 @@
 # ⚖️ framework-bench — the receipt
 
 [![Made with Claude](https://img.shields.io/badge/Made_with-Claude-D97757?logo=anthropic&logoColor=white)](https://tjakoen.github.io/notes/ten-times-zero)
+[![License: Apache 2.0](https://img.shields.io/badge/license-Apache_2.0-blue)](LICENSE)
 
 **The same small blog, built four ways, measured by one harness.** For two notes I claimed my
 no-build, server-rendered stack ships less JavaScript than a framework, and both times I refused to
