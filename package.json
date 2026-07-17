@@ -1,0 +1,19 @@
+{
+  "name": "framework-bench",
+  "version": "0.1.0",
+  "description": "The same small blog built three ways (native/BATCH vs Astro vs Next.js) and measured by one harness. Public proof of the native-first, no-build thesis: re-run it yourself.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "bench": "bun bench.ts",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@tjakoen/batch": "github:tjakoen/batch#5d04be0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "bun-types": "^1.3.14",
+    "typescript": "^5.8.0"
+  }
+}

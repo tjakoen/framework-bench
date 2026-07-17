@@ -1,0 +1,41 @@
+---
+// src/layouts/Base.astro — the shared document shell, mirroring native/views.ts `page()` exactly
+// (same head order, same <header class="site-head"> markup). Only the `.stack` label differs from
+// native ("Astro" vs "native / BATCH"). JSON-LD is written with `set:html` + `is:inline` so Astro
+// neither escapes nor tries to bundle it — it comes out byte-identical to native's
+// `JSON.stringify(opts.jsonLd)}`.
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  jsonLd: object;
+}
+const { title, description, canonicalPath, jsonLd } = Astro.props;
+const origin = Astro.site!.origin;
+const canonical = origin + canonicalPath;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<meta name="description" content={description}>
+<link rel="canonical" href={canonical}>
+<meta property="og:type" content="website">
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+<meta property="og:url" content={canonical}>
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content={title}>
+<meta name="twitter:description" content={description}>
+<script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)}></script>
+<link rel="stylesheet" href="/styles/app.css">
+</head>
+<body>
+<header class="site-head">
+<nav aria-label="Primary"><a class="brand" href="/">Framework Bench</a><span class="stack">Astro</span></nav>
+</header>
+<slot />
+</body>
+</html>

@@ -1,0 +1,19 @@
+<p>Every performance opinion eventually reduces to one measurable fact: how many bytes the user downloaded to make the page work. Load time depends on a network you do not control. Bytes shipped do not. So that is the number worth arguing about.</p>
+
+<h2>The same blog, four ways</h2>
+<p>To keep the comparison honest, this blog is built in four stacks that render identical HTML, share one stylesheet byte for byte, and carry the same SEO head. Then one harness measures each on the same two pages. The only thing that varies is how each stack makes the post filter work. Here is the JavaScript each ships for that filter on the index page:</p>
+<ul>
+<li><strong>Astro:</strong> about 744 bytes, an inlined script, no framework runtime.</li>
+<li><strong>native and BATCH:</strong> about 2kb, one small module, no build step.</li>
+<li><strong>native with Declarative Partial Updates:</strong> about 3kb of glue over a native browser swap, and zero JavaScript for the parts that stream in.</li>
+<li><strong>Next and React:</strong> about 118kb, the framework runtime plus hydration.</li>
+</ul>
+<p>On the article page, which has no interaction at all, the three native stacks ship no JavaScript. Next still ships about 108kb, because a client-component page hydrates whether it needs to or not. Same content, two orders of magnitude apart at the extremes.</p>
+
+<h2>The facts a stopwatch cannot see</h2>
+<p>Bytes are not the whole story. Three of the four stacks run with a build step and a large dependency tree; the two native ones have no build step and a single direct dependency. The parity columns matter too. Title, description, canonical, Open Graph, one <code>h1</code>, and JSON-LD are present on every stack, on purpose. If one had better metadata that would be a flaw in the test, not a win for the stack.</p>
+
+<h2>Reading it honestly</h2>
+<p>A few caveats keep the numbers straight. Astro inlines its filter script, so a naive resource count would report zero; counted properly it is those 744 bytes. The native server used here does not compress, so its byte figures are an upper bound and would only shrink behind a CDN. And load time is measured locally with no network hop, so treat it as corroboration, never as the headline. Real-world latency is added to every stack equally.</p>
+
+<p>The point is not that one number wins a prize. It is that the interaction is identical and the cost is not. For the argument behind these numbers, see <a href="/posts/the-browser-grew-up">The browser grew up</a>. For a new primitive that pushes the JavaScript cost close to zero, see <a href="/posts/native-partial-updates">Partial updates without a framework</a>.</p>

@@ -1,0 +1,7 @@
+[
+  { "id": "platform",    "label": "Platform" },
+  { "id": "performance", "label": "Performance" },
+  { "id": "tooling",     "label": "Tooling" },
+  { "id": "native",      "label": "Native" },
+  { "id": "seo",         "label": "SEO" }
+]

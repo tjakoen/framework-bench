@@ -1,0 +1,79 @@
+[
+  {
+    "slug": "native-partial-updates",
+    "title": "Partial updates without a framework",
+    "date": "2026-07-17",
+    "tag": "platform",
+    "excerpt": "A new browser primitive does htmx-style swaps with almost no JavaScript. Here is the measured catch."
+  },
+  {
+    "slug": "the-browser-grew-up",
+    "title": "The browser grew up",
+    "date": "2026-06-15",
+    "tag": "platform",
+    "excerpt": "The platform now does natively what we once reached for frameworks to do."
+  },
+  {
+    "slug": "measuring-downloads",
+    "title": "Measuring what the user actually downloads",
+    "date": "2026-06-08",
+    "tag": "performance",
+    "excerpt": "The only performance number that isn't a guess: bytes over the wire."
+  },
+  {
+    "slug": "build-step-cost",
+    "title": "What a build step really costs",
+    "date": "2026-05-30",
+    "tag": "tooling",
+    "excerpt": "A build step is never free — you just stop seeing the invoice."
+  },
+  {
+    "slug": "zero-dependencies",
+    "title": "Zero dependencies by default",
+    "date": "2026-05-22",
+    "tag": "native",
+    "excerpt": "Every dependency is a bet on someone else's roadmap. Start from none."
+  },
+  {
+    "slug": "js-budget",
+    "title": "A JS budget you can defend",
+    "date": "2026-05-14",
+    "tag": "performance",
+    "excerpt": "Set a byte budget first, then decide what earns a slot inside it."
+  },
+  {
+    "slug": "islands-and-native",
+    "title": "Islands, hydration, and native",
+    "date": "2026-05-06",
+    "tag": "platform",
+    "excerpt": "Islands were a smart retreat toward the thing the platform already gives you."
+  },
+  {
+    "slug": "seo-parity-floor",
+    "title": "SEO is a parity floor, not a feature",
+    "date": "2026-04-28",
+    "tag": "seo",
+    "excerpt": "Good metadata isn't a differentiator — it's the price of admission."
+  },
+  {
+    "slug": "frameworks-earning-js",
+    "title": "When a framework earns its JS",
+    "date": "2026-04-20",
+    "tag": "performance",
+    "excerpt": "Frameworks aren't the enemy — unearned framework JS is."
+  },
+  {
+    "slug": "node-modules-cost",
+    "title": "The cost of node_modules you never see",
+    "date": "2026-04-12",
+    "tag": "tooling",
+    "excerpt": "The bytes that never ship to users still cost you supply chain and time."
+  },
+  {
+    "slug": "server-first",
+    "title": "Server-render first, enhance second",
+    "date": "2026-04-04",
+    "tag": "native",
+    "excerpt": "Render the page on the server; add behavior only where it pays for itself."
+  }
+]

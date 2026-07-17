@@ -1,0 +1,21 @@
+{
+  "name": "framework-bench-native-dpu",
+  "version": "0.1.0",
+  "description": "The native + Declarative Partial Updates (DPU) target for the framework bench: SSR HTML plus one tiny feature-detected module that swaps a server fragment with the browser's native streamHTMLUnsafe()/setHTMLUnsafe() — no framework runtime, no swap library. Plus an out-of-order streaming demo (<?marker> + <template for>).",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "@tjakoen/batch": "github:tjakoen/batch#5d04be0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "bun-types": "^1.3.14",
+    "typescript": "^5.8.0"
+  },
+  "scripts": {
+    "dev": "bun --hot server.ts",
+    "start": "bun server.ts",
+    "export": "bun tools/export.ts",
+    "check": "tsc --noEmit"
+  }
+}

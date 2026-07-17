@@ -1,0 +1,41 @@
+---
+// src/pages/posts/[slug].astro — one post, mirroring native/views.ts `renderPost` exactly. All 10
+// slugs are enumerated via getStaticPaths so this becomes 10 static HTML files at build time.
+import Base from "../../layouts/Base.astro";
+import { readPosts, readBody, type Post } from "../../content.ts";
+
+export function getStaticPaths() {
+  const posts = readPosts();
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+interface Props { post: Post }
+const { post } = Astro.props;
+const bodyHtml = readBody(post.slug);
+
+const fmtDate = (iso: string) =>
+  new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" })
+    .format(new Date(iso + "T00:00:00Z"));
+
+const canonicalPath = `/posts/${post.slug}`;
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: post.title,
+  description: post.excerpt,
+  datePublished: post.date,
+  keywords: post.tag,
+  url: Astro.site!.origin + canonicalPath,
+};
+---
+<Base title={`${post.title} · Framework Bench`} description={post.excerpt} canonicalPath={canonicalPath} jsonLd={jsonLd}>
+<main class="wrap">
+<a class="back" href="/">← all posts</a>
+<article class="post">
+<span class={`tag tag--${post.tag}`}>{post.tag}</span>
+<h1 class="post-title">{post.title}</h1>
+<time datetime={post.date}>{fmtDate(post.date)}</time>
+<div class="post-body" set:html={bodyHtml} />
+</article>
+</main>
+</Base>

@@ -1,0 +1,8 @@
+node_modules/
+apps/*/node_modules/
+dist/
+.astro/
+.next/
+out/
+*.tsbuildinfo
+*.log

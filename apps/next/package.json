@@ -1,0 +1,23 @@
+{
+  "name": "framework-bench-next",
+  "version": "0.1.0",
+  "description": "The Next.js (app router) target for the framework bench: server-rendered HTML + one client component filter, React + hydration shipped honestly.",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "^15.4.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "typescript": "^5.8.0"
+  }
+}

@@ -1,0 +1,232 @@
+{
+  "generated": "2026-07-17T08:41:55.607Z",
+  "measuredRuns": 5,
+  "pages": [
+    "/",
+    "/posts/the-browser-grew-up"
+  ],
+  "targets": [
+    {
+      "name": "native / BATCH",
+      "serveMode": "bun server.ts — no build step (server IS the production artifact)",
+      "buildStep": false,
+      "runtimeDeps": [
+        "@tjakoen/batch"
+      ],
+      "nodeModules": "47M",
+      "pages": [
+        {
+          "path": "/",
+          "jsBytes": 1575,
+          "inlineJsBytes": 0,
+          "totalJsBytes": 1575,
+          "htmlBytes": 8118,
+          "wireBytes": 14751,
+          "requests": 3,
+          "cssBytes": 4758,
+          "renderBlockingCss": 1,
+          "renderBlockingJs": 0,
+          "ttfbMs": 4,
+          "loadMs": 12,
+          "title": true,
+          "desc": true,
+          "canonical": true,
+          "og": true,
+          "oneH1": true,
+          "jsonLd": true,
+          "htmlLang": true,
+          "semantic": true
+        },
+        {
+          "path": "/posts/the-browser-grew-up",
+          "jsBytes": 0,
+          "inlineJsBytes": 0,
+          "totalJsBytes": 0,
+          "htmlBytes": 2211,
+          "wireBytes": 7269,
+          "requests": 2,
+          "cssBytes": 4758,
+          "renderBlockingCss": 1,
+          "renderBlockingJs": 0,
+          "ttfbMs": 3,
+          "loadMs": 9,
+          "title": true,
+          "desc": true,
+          "canonical": true,
+          "og": true,
+          "oneH1": true,
+          "jsonLd": true,
+          "htmlLang": true,
+          "semantic": true
+        }
+      ]
+    },
+    {
+      "name": "native + DPU",
+      "serveMode": "bun server.ts — no build step; filter swaps a server fragment via native setHTMLUnsafe()/streamHTMLUnsafe()",
+      "buildStep": false,
+      "runtimeDeps": [
+        "@tjakoen/batch"
+      ],
+      "nodeModules": "47M",
+      "pages": [
+        {
+          "path": "/",
+          "jsBytes": 2645,
+          "inlineJsBytes": 0,
+          "totalJsBytes": 2645,
+          "htmlBytes": 8124,
+          "wireBytes": 15827,
+          "requests": 3,
+          "cssBytes": 4758,
+          "renderBlockingCss": 1,
+          "renderBlockingJs": 0,
+          "ttfbMs": 3,
+          "loadMs": 10,
+          "title": true,
+          "desc": true,
+          "canonical": true,
+          "og": true,
+          "oneH1": true,
+          "jsonLd": true,
+          "htmlLang": true,
+          "semantic": true
+        },
+        {
+          "path": "/posts/the-browser-grew-up",
+          "jsBytes": 0,
+          "inlineJsBytes": 0,
+          "totalJsBytes": 0,
+          "htmlBytes": 2209,
+          "wireBytes": 7267,
+          "requests": 2,
+          "cssBytes": 4758,
+          "renderBlockingCss": 1,
+          "renderBlockingJs": 0,
+          "ttfbMs": 3,
+          "loadMs": 9,
+          "title": true,
+          "desc": true,
+          "canonical": true,
+          "og": true,
+          "oneH1": true,
+          "jsonLd": true,
+          "htmlLang": true,
+          "semantic": true
+        }
+      ]
+    },
+    {
+      "name": "Astro",
+      "serveMode": "astro build → astro preview (static output)",
+      "buildStep": true,
+      "runtimeDeps": [
+        "astro"
+      ],
+      "nodeModules": "190M",
+      "pages": [
+        {
+          "path": "/",
+          "jsBytes": 0,
+          "inlineJsBytes": 744,
+          "totalJsBytes": 744,
+          "htmlBytes": 8821,
+          "wireBytes": 4664,
+          "requests": 2,
+          "cssBytes": 1899,
+          "renderBlockingCss": 1,
+          "renderBlockingJs": 0,
+          "ttfbMs": 11,
+          "loadMs": 38,
+          "title": true,
+          "desc": true,
+          "canonical": true,
+          "og": true,
+          "oneH1": true,
+          "jsonLd": true,
+          "htmlLang": true,
+          "semantic": true
+        },
+        {
+          "path": "/posts/the-browser-grew-up",
+          "jsBytes": 0,
+          "inlineJsBytes": 0,
+          "totalJsBytes": 0,
+          "htmlBytes": 2186,
+          "wireBytes": 3092,
+          "requests": 2,
+          "cssBytes": 1899,
+          "renderBlockingCss": 1,
+          "renderBlockingJs": 0,
+          "ttfbMs": 4,
+          "loadMs": 12,
+          "title": true,
+          "desc": true,
+          "canonical": true,
+          "og": true,
+          "oneH1": true,
+          "jsonLd": true,
+          "htmlLang": true,
+          "semantic": true
+        }
+      ]
+    },
+    {
+      "name": "Next.js",
+      "serveMode": "next build && next start (client-component page is not pure SSG — see note)",
+      "buildStep": true,
+      "runtimeDeps": [
+        "next",
+        "react",
+        "react-dom"
+      ],
+      "nodeModules": "335M",
+      "pages": [
+        {
+          "path": "/",
+          "jsBytes": 105201,
+          "inlineJsBytes": 16116,
+          "totalJsBytes": 121317,
+          "htmlBytes": 25100,
+          "wireBytes": 112097,
+          "requests": 7,
+          "cssBytes": 1899,
+          "renderBlockingCss": 1,
+          "renderBlockingJs": 1,
+          "ttfbMs": 9,
+          "loadMs": 128,
+          "title": true,
+          "desc": true,
+          "canonical": true,
+          "og": true,
+          "oneH1": true,
+          "jsonLd": true,
+          "htmlLang": true,
+          "semantic": true
+        },
+        {
+          "path": "/posts/the-browser-grew-up",
+          "jsBytes": 104145,
+          "inlineJsBytes": 7132,
+          "totalJsBytes": 111277,
+          "htmlBytes": 10043,
+          "wireBytes": 109049,
+          "requests": 6,
+          "cssBytes": 1899,
+          "renderBlockingCss": 1,
+          "renderBlockingJs": 1,
+          "ttfbMs": 4,
+          "loadMs": 66,
+          "title": true,
+          "desc": true,
+          "canonical": true,
+          "og": true,
+          "oneH1": true,
+          "jsonLd": true,
+          "htmlLang": true,
+          "semantic": true
+        }
+      ]
+    }
+  ]
+}

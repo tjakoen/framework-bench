@@ -1,0 +1,24 @@
+<p>For years, updating part of a page without a full reload meant reaching for a framework. htmx made the pattern small and honest: the server renders a fragment, and a little library swaps it into the DOM. React made it large: ship a runtime, hydrate, and let the client own the update. Declarative Partial Updates, a proposal now landing in Chrome, asks a different question. What if the browser did the swap itself?</p>
+
+<h2>What the browser now does on its own</h2>
+<p>DPU has two halves. The first is out-of-order streaming in plain HTML. A response can open a slot with a <code>&lt;?start name="feed"&gt;</code> marker, keep streaming the rest of the page, and fill that slot later with a <code>&lt;template for="feed"&gt;</code> further down the same response. The browser patches it in as it parses, with no script at all. The second half is a set of native methods: <code>setHTMLUnsafe()</code> for a one-shot swap, and <code>streamHTMLUnsafe()</code>, which you can pipe a fetch response straight into.</p>
+<blockquote><code>response.body.pipeThrough(new TextDecoderStream()).pipeTo(el.streamHTMLUnsafe())</code></blockquote>
+<p>No swap library sits under either one. The mechanism is the browser.</p>
+
+<h2>What it costs, measured</h2>
+<p>This blog ships in four stacks, and one harness measures all of them on the same page with the same filter. Reaching for React through Next ships about 118kb of JavaScript to make the list filter work. htmx would ship its runtime, roughly 14kb. The DPU version ships about 3kb: a little glue to read the filter, fetch the server fragment, and hand it to the browser. And the out-of-order streaming fill, the headline capability, ships zero JavaScript on a browser that supports it. The browser does the patch.</p>
+<p>Perf only corroborates the byte count. On a local run with no network hop, the DPU pages load in single-digit milliseconds, like the other native pages. The honest number is the code you ship, not the clock, because real-world latency is added to every stack equally.</p>
+
+<h2>The catch, stated plainly</h2>
+<p>Full DPU is a flagged experiment. As of the middle of 2026 the complete feature, out-of-order markers plus <code>streamHTMLUnsafe()</code>, runs only in Chrome 148 behind an experimental flag. Firefox stable ships the buffered setter, <code>setHTMLUnsafe()</code>, but not streaming and not markers. Safari has taken no public position. So the cross-browser floor today is fetch a fragment and call <code>setHTMLUnsafe()</code>, and even that is not everywhere.</p>
+<ul>
+<li><strong>Chrome 148, flag on:</strong> everything, including the zero-JavaScript out-of-order streaming.</li>
+<li><strong>Chrome and Firefox stable:</strong> <code>setHTMLUnsafe()</code> only, a buffered swap.</li>
+<li><strong>Safari and older browsers:</strong> nothing yet, so you keep a client-side fallback.</li>
+</ul>
+<p>This is not shippable as your only strategy before roughly 2027. That is why the measured DPU app here renders its list on the server first and treats DPU as progressive enhancement. Nothing essential depends on the flag being on.</p>
+
+<h2>It complements htmx, it does not replace it</h2>
+<p>DPU is only the swap-and-stream layer. It says nothing about what triggers an update, how the request is formed, how loading and error states are shown, or how history and the URL stay in sync. htmx is mostly those other things. So the honest read is not that the browser killed htmx. It is that the browser is absorbing htmx's smallest and most mechanical piece, the swap itself, and leaving the interesting coordination to you or to a much smaller library. The runtime you ship shrinks. It does not vanish.</p>
+
+<p>This is the measured companion to two earlier pieces: <a href="https://tjakoen.github.io/notes/the-browser-grew-up">The browser grew up</a>, on why the platform now does natively what we once imported, and <a href="https://tjakoen.github.io/notes/feels-like-an-app">Feels like an app</a>, on getting app-like interaction without an app-sized runtime. The opinion lives there. The numbers live here.</p>
