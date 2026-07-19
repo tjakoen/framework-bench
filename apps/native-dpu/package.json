@@ -5,7 +5,7 @@
   "type": "module",
   "private": true,
   "dependencies": {
-    "@tjakoen/batch": "github:tjakoen/batch#5d04be0"
+    "@tjakoen/batch": "^0.1.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.61.1",
