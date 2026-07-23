@@ -15,6 +15,7 @@
 import { audit, kb, type AuditReport, type DomAudit } from "@tjakoen/batch/audit/audit.ts";
 import { mkdir, writeFile, readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { renderHtml } from "./render-html.ts";
 
 const ROOT = import.meta.dir;
 const PAGES = ["/", "/posts/the-browser-grew-up"] as const;
@@ -275,7 +276,7 @@ function factTable(results: TargetResult[]): string {
     `|--------|:----------:|-----------------------|:------------:|--------------------------|\n${rows}`;
 }
 
-function render(results: TargetResult[]): string {
+function render(results: TargetResult[], generatedDate: string): string {
   const idx = results.map((r) => ({ name: r.name, js: r.pages.find((p) => p.path === "/")!.totalJsBytes }));
   const sorted = [...idx].sort((a, b) => a.js - b.js);
   const lightest = sorted[0]!, heaviest = sorted[sorted.length - 1]!;
@@ -288,7 +289,10 @@ function render(results: TargetResult[]): string {
   return `# Framework bench — results
 
 _The same small blog, built ${results.length} ways, measured by one harness ([\`bench.ts\`](bench.ts), which
-reuses BATCH's framework-generic \`audit()\`). Re-run with \`bun run bench\`. Generated ${new Date().toISOString().slice(0, 10)}._
+reuses BATCH's framework-generic \`audit()\`). Re-run with \`bun run bench\`. Generated ${generatedDate}._
+
+**→ The [live results page](https://tjakoen.github.io/framework-bench/)** renders these numbers as
+charts (and itself ships 0kb of JavaScript).
 
 ## How to read this (the honest frame)
 
@@ -368,23 +372,32 @@ _Perf is corroboration. The bytes, the request count, and the build-step column 
 }
 
 // ── main ─────────────────────────────────────────────────────────────────────
-// RENDER_ONLY=1 re-emits results.md from the last results/results.json without re-measuring — handy for
-// iterating the prose without paying for four builds + audits.
+// RENDER_ONLY=1 re-emits results.md + docs/index.html from the last results/results.json without
+// re-measuring — handy for iterating the prose/page without paying for four builds + audits.
 let results: TargetResult[];
+let generated: string;
+let measuredRuns: number;
 if (Bun.env.RENDER_ONLY) {
   console.log(`framework-bench runner — RENDER_ONLY: re-rendering from results/results.json`);
-  results = JSON.parse(await readFile(join(ROOT, "results", "results.json"), "utf8")).targets;
+  const prev = JSON.parse(await readFile(join(ROOT, "results", "results.json"), "utf8"));
+  results = prev.targets;
+  generated = prev.generated; // keep the real measurement date — a re-render is not a re-measure
+  measuredRuns = prev.measuredRuns ?? MEASURED;
 } else {
   console.log(`framework-bench runner — ${TARGETS.length} targets, ${MEASURED} measured runs + ${WARM_DISCARD} warm discard, pages: ${PAGES.join(" , ")}`);
   results = [];
   for (const t of TARGETS) results.push(await measure(t));
+  generated = new Date().toISOString();
+  measuredRuns = MEASURED;
 }
 
 await mkdir(join(ROOT, "results"), { recursive: true });
-await writeFile(join(ROOT, "results", "results.json"), JSON.stringify({ generated: new Date().toISOString(), measuredRuns: MEASURED, pages: PAGES, targets: results }, null, 2));
-await writeFile(join(ROOT, "results.md"), render(results));
+await mkdir(join(ROOT, "docs"), { recursive: true });
+await writeFile(join(ROOT, "results", "results.json"), JSON.stringify({ generated, measuredRuns, pages: PAGES, targets: results }, null, 2));
+await writeFile(join(ROOT, "results.md"), render(results, generated.slice(0, 10)));
+await writeFile(join(ROOT, "docs", "index.html"), renderHtml(results, { generated, measuredRuns }));
 
-console.log(`\n[bench] wrote results.md + results/results.json`);
+console.log(`\n[bench] wrote results.md + results/results.json + docs/index.html`);
 for (const r of results) {
   const idx = r.pages.find((p) => p.path === "/")!;
   console.log(`  ${r.name.padEnd(16)} index JS ${kb(idx.jsBytes).padStart(6)}  wire ${kb(idx.wireBytes).padStart(6)}  req ${idx.requests}  build-step ${r.buildStep ? "Y" : "N"}`);

@@ -9,7 +9,9 @@ print a number I had not run. This repo is me running it. Same content, same pag
 every target — the only thing that varies is the framework you reach for, and that is exactly what
 gets weighed.
 
-→ **The numbers:** [`results.md`](results.md). The story behind them:
+→ **The numbers, live:** [tjakoen.github.io/framework-bench](https://tjakoen.github.io/framework-bench/)
+(a static results page that itself ships 0kb of JavaScript) — or as markdown in
+[`results.md`](results.md). The story behind them:
 [native-partial-updates](https://tjakoen.github.io/notes/native-partial-updates).
 
 ## The headline

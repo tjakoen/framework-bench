@@ -3,6 +3,9 @@
 _The same small blog, built 4 ways, measured by one harness ([`bench.ts`](bench.ts), which
 reuses BATCH's framework-generic `audit()`). Re-run with `bun run bench`. Generated 2026-07-17._
 
+**→ The [live results page](https://tjakoen.github.io/framework-bench/)** renders these numbers as
+charts (and itself ships 0kb of JavaScript).
+
 ## How to read this (the honest frame)
 
 - **Headline = network-independent, categorical metrics:** JS shipped, request count, wire bytes,
