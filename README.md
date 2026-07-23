@@ -66,7 +66,4 @@ BATCH's, reused unchanged, so the four stacks are judged by one instrument.
 - [`bench.ts`](bench.ts) — the cross-target runner. [`results.md`](results.md) — the rendered output.
 
 ---
-
-🤖 **Built with Claude, and then actually measured.** I made the calls, it did the typing, and the
-bet I kept calling well-founded finally has a receipt under it.
-[How I actually work with AI, receipts and all →](https://tjakoen.github.io/notes/ten-times-zero)
+🤖 **Built with Claude. I don't prompt and pray, I prompt and prove.** Every commit here is co-authored with an AI, on purpose. [How I actually work with AI, receipts and all →](https://tjakoen.github.io/notes/ten-times-zero)
